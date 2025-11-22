@@ -6,6 +6,9 @@
     <title>💌 Lời Tri Ân Thầy Cô THPT Lương Đắc Bằng - 20/11</title>
     <!-- Tải Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tải thư viện Animate On Scroll (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <!-- Cấu hình Tailwind cho màu sắc và font chữ -->
     <script>
         tailwind.config = {
@@ -25,16 +28,19 @@
         }
     </script>
     <!-- Nhúng font Playfair Display và Roboto -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght=400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght=700&family=Roboto:wght=400;700&display=swap" rel="stylesheet">
     <style>
         /* Thiết lập chung và hiệu ứng nền */
         body {
             font-family: 'Roboto', sans-serif;
             background-color: #f8f9fa;
+            scroll-behavior: smooth; /* Cuộn mượt khi nhấn nút */
         }
         .hero {
-            /* Thay thế bằng ảnh nền phù hợp cho THPT Lương Đắc Bằng */
-            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://github.com/le180237-afk/20-11-tri-an-thay-co/blob/main/vanngnw.jpg?raw=true'); 
+            /* THAY THẾ LINK ẢNH DƯỚI ĐÂY:
+               Sử dụng link ảnh trực tiếp (kết thúc bằng .jpg, .png,...)
+            */
+            background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://placehold.co/1920x1080/4f5b66/ffffff?text=Anh+Nen+Truong+LDB'); 
             background-size: cover;
             background-position: center;
             height: 100vh;
@@ -76,12 +82,28 @@
 </head>
 <body class="text-gray-800">
 
+    <!-- Modal thông báo tùy chỉnh (Thay thế cho alert()) -->
+    <div id="custom-alert-modal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300">
+        <div class="bg-white p-6 rounded-lg shadow-2xl max-w-sm w-full transform scale-100 transition-transform duration-300">
+            <div class="text-center">
+                <p class="text-primary text-2xl font-bold mb-4">⚠️ Thông Báo</p>
+                <p id="alert-message" class="text-gray-700 mb-6"></p>
+                <button onclick="document.getElementById('custom-alert-modal').classList.add('hidden')" 
+                        class="px-4 py-2 bg-primary text-white font-semibold rounded-lg hover:bg-red-700 transition">
+                    Đã Hiểu
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Kết thúc Modal -->
+
+
     <!-- Hiệu ứng nền - Tuyết rơi/Hạt rơi -->
     <div id="particles-js"></div> 
 
     <!-- Header / Hero Section -->
     <header class="hero flex justify-center items-center">
-        <div class="hero-content text-center px-4">
+        <div class="hero-content text-center px-4" data-aos="fade-up" data-aos-duration="1500">
             <h1 class="font-serif-display text-6xl md:text-8xl font-bold text-secondary mb-4 drop-shadow-lg">
                 Tri Ân Người Lái Đò
             </h1>
@@ -95,18 +117,26 @@
                 <a href="#messages" class="px-8 py-3 bg-secondary text-primary font-bold rounded-lg shadow-xl transition duration-300 hover:bg-yellow-400 transform hover:scale-105">
                     Xem Lời Chúc
                 </a>
-                <button class="px-8 py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg shadow-xl transition duration-300 hover:bg-white hover:text-primary transform hover:scale-105" 
-                    onclick="alert('Tính năng này cần hệ thống Backend (máy chủ) để lưu trữ lời chúc. Vui lòng phát triển thêm!')">
+                <a href="#send-message" class="px-8 py-3 bg-transparent text-white border-2 border-white font-bold rounded-lg shadow-xl transition duration-300 hover:bg-white hover:text-primary transform hover:scale-105">
                     Gửi Lời Chúc Của Tôi
-                </button>
+                </a>
             </div>
         </div>
     </header>
 
     <main>
+        <!-- Bộ Đếm Ngược/Thông Điệp Nổi Bật -->
+        <section id="countdown" class="py-10 bg-primary text-white text-center shadow-lg">
+            <div class="container mx-auto px-4">
+                <h3 class="text-3xl font-bold mb-2">CHÀO MỪNG NGÀY 20 THÁNG 11</h3>
+                <p id="countdown-timer" class="text-5xl font-serif-display font-bold"></p>
+            </div>
+        </section>
+
+
         <!-- Lời Tri Ân Chung -->
         <section id="tribute" class="py-16 bg-white">
-            <div class="container mx-auto px-4 max-w-4xl">
+            <div class="container mx-auto px-4 max-w-4xl" data-aos="fade-right">
                 <h3 class="font-serif-display text-4xl font-bold text-primary mb-6 text-center">💖 Thay Lời Cảm Ơn Sâu Sắc</h3>
                 <p class="text-lg leading-relaxed text-gray-700 mb-6 text-justify">
                     Kính gửi các Thầy Cô giáo tại **Trường THPT Lương Đắc Bằng** – những người đã gieo mầm tri thức và nuôi dưỡng tâm hồn cho bao thế hệ học sinh. Với tâm huyết và sự tận tụy không ngừng, Thầy Cô không chỉ truyền đạt kiến thức mà còn dạy chúng em về đạo lý làm người, về ý chí vươn lên và trách nhiệm với cộng đồng.
@@ -122,41 +152,70 @@
         
         <!-- Khoảnh Khắc Đáng Nhớ (Gallery) -->
         <section id="gallery" class="py-16 bg-dark-bg">
-            <div class="container mx-auto px-4 max-w-6xl">
+            <div class="container mx-auto px-4 max-w-6xl" data-aos="fade-left">
                 <h3 class="font-serif-display text-4xl font-bold text-secondary mb-10 text-center">📸 Khoảnh Khắc Đáng Nhớ</h3>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                     <!-- Placeholder cho hình ảnh -->
-                    <div class="bg-gray-700 h-64 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-center text-white p-4 transition duration-300 hover:scale-105">
-                        <p class="https://www.facebook.com/photo/?fbid=843398464928209&set=a.265066059428122&__cft__[0]=AZUVwS6h7YHQnXIaPlFIqkn0TsSrYI7JM3gKfyXDY8HutdoKfn-NODzO86OyH2jDKKDvazDLHQPZzFfAKStsc2VmENdK811xOKB3IhIP2TCgdefKn2Q2w6yQ7CKhczSYPndXGIVpzSMMJ24M4HMJayaO-1Svp8nkEl3V71-orH6_wELACwzRn-qeeRLEi9Hhw7U&__tn__=EH-R">Ảnh Trường THPT Lương Đắc Bằng</p>
+                    <div class="bg-gray-700 h-64 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-center text-white p-4 transition duration-300 hover:scale-105" data-aos="zoom-in">
+                        <p class="font-bold text-lg">Ảnh Trường THPT Lương Đắc Bằng</p>
                     </div>
-                    <div class="bg-gray-700 h-64 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-center text-white p-4 transition duration-300 hover:scale-105">
-                        <p class="https://scontent.fhan2-4.fna.fbcdn.net/v/t39.30808-6/544795176_816488417619214_7288318762565708173_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEiuewymCm_5A6js1Ir22xR21QzF3IELG_bVDMXcgQsb7sQ-w66H5_H4SIBosRN7TnLgg45KT8ofN78M_XuZP-_&_nc_ohc=IhSBcR4S7WAQ7kNvwEctubP&_nc_oc=AdkXO3gFtxiIVtBd67CE8UhtP5WV16Ug7TJHoiLxV7PcQBFiRZgrvabSUz2S1C9LpkMqjNaj6AJTLN2rmW6XjlTU&_nc_zt=23&_nc_ht=scontent.fhan2-4.fna&_nc_gid=9qgc1QTg4BQSOTHEG_Vv-A&oh=00_Afih2MNNX9afn569HaXJuGf8yiWAooyQ6xjkezHAnpbP7Q&oe=6927A441">Hoạt Động Dạy và Học</p>
+                    <div class="bg-gray-700 h-64 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-center text-white p-4 transition duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="150">
+                        <p class="font-bold text-lg">Hoạt Động Dạy và Học</p>
                     </div>
-                    <div class="bg-gray-700 h-64 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-center text-white p-4 transition duration-300 hover:scale-105">
-                        <p class="https://scontent.fhan2-5.fna.fbcdn.net/v/t39.30808-6/586558156_880487844552604_580344962991444787_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeE0OM_DHt39zd7Bj966xygi-KyinM_HpFf4rKKcz8ekV0ZArCSfL-rrnG62_R56o0HakzOEHgWmZdaozEENz58R&_nc_ohc=W1CmQwVSP90Q7kNvwFAvA3j&_nc_oc=AdmOJV6vYKrN0Lpg6HyXHJ8Lsq4dCK_grNOfjC1YmsErF2lfFM3Ohphf3vd-rD3V4M6CAFqFImVEtgiTbHK2qQxs&_nc_zt=23&_nc_ht=scontent.fhan2-5.fna&_nc_gid=bgfl6CCEAELT-LyGp8PLBg&oh=00_AfjNEdu8456Qa8zMDQ-XMKWyebFVM4qyANeUZBniUHiaZA&oe=6927AF65">Văn Nghệ Chào Mừng 20/11</p>
+                    <div class="bg-gray-700 h-64 rounded-xl shadow-lg overflow-hidden flex items-center justify-center text-center text-white p-4 transition duration-300 hover:scale-105" data-aos="zoom-in" data-aos-delay="300">
+                        <p class="font-bold text-lg">Văn Nghệ Chào Mừng 20/11</p>
                     </div>
                     <!-- Cần thay thế các div trên bằng thẻ <img> với ảnh thật -->
                 </div>
             </div>
         </section>
 
-        <!-- Lời Chúc (Messages) -->
-        <section id="messages" class="py-16 bg-light-bg">
-            <div class="container mx-auto px-4 max-w-4xl">
+        <!-- Form Gửi Lời Chúc Mới (Tương tác) -->
+        <section id="send-message" class="py-16 bg-light-bg">
+            <div class="container mx-auto px-4 max-w-4xl" data-aos="fade-up">
+                <h3 class="font-serif-display text-4xl font-bold text-primary mb-10 text-center">💌 Gửi Lời Chúc Của Bạn</h3>
+                <div class="bg-white p-8 rounded-xl shadow-2xl border-t-4 border-secondary">
+                    <form id="message-form" onsubmit="handleMessageSubmit(event)">
+                        <div class="mb-4">
+                            <label for="sender-name" class="block text-gray-700 text-sm font-bold mb-2">Tên/Lớp của bạn:</label>
+                            <input type="text" id="sender-name" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Ví dụ: Học sinh 12A1 (2025)" required>
+                        </div>
+                        <div class="mb-6">
+                            <label for="message-content" class="block text-gray-700 text-sm font-bold mb-2">Lời chúc (Tối đa 300 ký tự):</label>
+                            <textarea id="message-content" rows="4" class="shadow appearance-none border rounded w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent" placeholder="Viết lời tri ân chân thành nhất của bạn..." maxlength="300" required></textarea>
+                            <p class="text-xs text-gray-500 mt-1">Đã nhập: <span id="char-count">0</span>/300 ký tự.</p>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <button type="submit" class="bg-primary hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg focus:outline-none focus:shadow-outline transition duration-300 transform hover:scale-105 shadow-md">
+                                Gửi Lời Tri Ân
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Lời Chúc (Messages) - Nơi Hiển Thị Lời Chúc Mới -->
+        <section id="messages" class="py-16 bg-white">
+            <div class="container mx-auto px-4 max-w-4xl" data-aos="fade-up">
                 <h3 class="font-serif-display text-4xl font-bold text-primary mb-10 text-center">💬 Các Lời Chúc Đặc Sắc</h3>
                 
-                <!-- Lời chúc 1 -->
-                <div class="bg-white p-6 mb-6 rounded-xl shadow-lg border-l-4 border-primary transition duration-300 hover:shadow-2xl">
-                    <h4 class="font-serif-display text-xl text-primary mb-2">Gửi Cô [Tên Cô giáo] - Chủ nhiệm KXX</h4>
-                    <p class="text-gray-700 italic">"Chúng em cảm ơn Cô đã không chỉ là người dẫn đường mà còn là người mẹ thứ hai. Chúc Cô 20/11 tràn đầy niềm vui, hạnh phúc và luôn giữ được nụ cười rạng rỡ!"</p>
-                    <span class="block text-sm text-gray-500 mt-4 text-right">- Tập thể lớp 12A3 - Khóa 2023-2025</span>
-                </div>
-                
-                <!-- Lời chúc 2 -->
-                <div class="bg-white p-6 mb-6 rounded-xl shadow-lg border-l-4 border-secondary transition duration-300 hover:shadow-2xl">
-                    <h4 class="font-serif-display text-xl text-primary mb-2">Gửi Thầy [Tên Thầy giáo] - Tổ Trưởng Tổ Toán</h4>
-                    <p class="text-gray-700 italic">"Những bài giảng về lượng giác và giải tích của Thầy mãi là những ký ức đáng nhớ. Kính chúc Thầy sức khỏe dồi dào, tiếp tục cống hiến cho sự nghiệp trồng người!"</p>
-                    <span class="block text-sm text-gray-500 mt-4 text-right">- Học sinh cũ, Khóa 2017-2020</span>
+                <div id="messages-list" class="space-y-6">
+                    <!-- Lời chúc 1 -->
+                    <div class="message-card bg-light-bg p-6 rounded-xl shadow-lg border-l-4 border-primary transition duration-300 hover:shadow-2xl" data-aos="fade-up">
+                        <h4 class="font-serif-display text-xl text-primary mb-2">Gửi Cô [Tên Cô giáo] - Chủ nhiệm KXX</h4>
+                        <p class="text-gray-700 italic">"Chúng em cảm ơn Cô đã không chỉ là người dẫn đường mà còn là người mẹ thứ hai. Chúc Cô 20/11 tràn đầy niềm vui, hạnh phúc và luôn giữ được nụ cười rạng rỡ!"</p>
+                        <span class="block text-sm text-gray-500 mt-4 text-right">- Tập thể lớp 12A3 - Khóa 2023-2025</span>
+                    </div>
+                    
+                    <!-- Lời chúc 2 -->
+                    <div class="message-card bg-light-bg p-6 rounded-xl shadow-lg border-l-4 border-secondary transition duration-300 hover:shadow-2xl" data-aos="fade-up" data-aos-delay="100">
+                        <h4 class="font-serif-display text-xl text-primary mb-2">Gửi Thầy [Tên Thầy giáo] - Tổ Trưởng Tổ Toán</h4>
+                        <p class="text-gray-700 italic">"Những bài giảng về lượng giác và giải tích của Thầy mãi là những ký ức đáng nhớ. Kính chúc Thầy sức khỏe dồi dào, tiếp tục cống hiến cho sự nghiệp trồng người!"</p>
+                        <span class="block text-sm text-gray-500 mt-4 text-right">- Học sinh cũ, Khóa 2017-2020</span>
+                    </div>
+                    <!-- Các lời chúc mới sẽ được thêm vào đây -->
                 </div>
             </div>
         </section>
@@ -165,43 +224,125 @@
     <!-- Footer -->
     <footer class="bg-primary text-white py-6">
         <div class="container mx-auto px-4 text-center">
-            <p>&copy; 2025 - Tập thể A6 K61.</p>
-            <p class="text-sm mt-1">Design & Code: Lê Thắng Lợi]</p>
+            <p>&copy; 2025 - Dự Án Tri Ân Thầy Cô THPT Lương Đắc Bằng.</p>
+            <p class="text-sm mt-1">Design & Code: [Tên Người Thực Hiện/Tập Thể Lớp]</p>
         </div>
     </footer>
 
-    <!-- JavaScript cho Hiệu ứng Hạt Rơi -->
+    <!-- Tải thư viện AOS (chỉ sau khi HTML đã tải xong) -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Khởi tạo AOS
+        AOS.init({
+            once: true, // Chỉ chạy animation 1 lần
+        });
+        
+        // Hàm đếm ngược thời gian (Tính năng 3)
+        function startCountdown() {
+            // Đặt ngày 20 tháng 11 của năm hiện tại
+            const now = new Date();
+            let targetDate = new Date(now.getFullYear(), 10, 20); // Tháng 10 là tháng 11
+            
+            // Nếu đã qua 20/11 năm nay, đếm ngược đến 20/11 năm sau
+            if (now.getTime() > targetDate.getTime()) {
+                targetDate.setFullYear(now.getFullYear() + 1);
+            }
+
+            const countdownElement = document.getElementById('countdown-timer');
+
+            function updateCountdown() {
+                const distance = targetDate.getTime() - new Date().getTime();
+
+                if (distance < 0) {
+                    countdownElement.innerHTML = "Ngày Nhà Giáo Việt Nam!";
+                    clearInterval(interval);
+                    return;
+                }
+
+                // Tính toán thời gian
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                countdownElement.innerHTML = `${days} ngày | ${hours} giờ | ${minutes} phút | ${seconds} giây`;
+            }
+
+            // Cập nhật mỗi giây
+            updateCountdown();
+            const interval = setInterval(updateCountdown, 1000);
+        }
+
+        // Bắt đầu đếm ngược khi trang tải
+        window.onload = startCountdown;
+
+
+        // Hàm xử lý Form gửi lời chúc (Tính năng 1)
+        function handleMessageSubmit(event) {
+            event.preventDefault(); // Ngăn chặn tải lại trang
+
+            const name = document.getElementById('sender-name').value;
+            const content = document.getElementById('message-content').value;
+            const messagesList = document.getElementById('messages-list');
+
+            // Tạo thẻ HTML cho lời chúc mới
+            const newMessage = document.createElement('div');
+            newMessage.classList.add('message-card', 'bg-light-bg', 'p-6', 'rounded-xl', 'shadow-lg', 'border-l-4', 'border-secondary', 'transition', 'duration-300', 'hover:shadow-2xl');
+            newMessage.setAttribute('data-aos', 'flip-up');
+            newMessage.innerHTML = `
+                <h4 class="font-serif-display text-xl text-primary mb-2">Lời Chúc Mới!</h4>
+                <p class="text-gray-700 italic">"${content}"</p>
+                <span class="block text-sm text-gray-500 mt-4 text-right">- ${name}</span>
+            `;
+
+            // Thêm vào đầu danh sách (mới nhất nằm trên cùng)
+            messagesList.prepend(newMessage);
+
+            // Xóa nội dung form và thông báo thành công
+            document.getElementById('message-form').reset();
+            showCustomAlert('Cảm ơn bạn! Lời chúc của bạn đã được gửi thành công. (Lưu ý: Lời chúc này chỉ hiển thị tạm thời trên trình duyệt của bạn.)');
+            
+             // Cập nhật lại AOS để hiển thị hiệu ứng cho phần tử mới
+             AOS.refresh();
+        }
+
+        // Cập nhật số ký tự (Tính năng phụ)
+        document.getElementById('message-content').addEventListener('input', function() {
+            document.getElementById('char-count').textContent = this.value.length;
+        });
+
+
+        // Hiển thị Modal tùy chỉnh (Đã chỉnh sửa từ file trước)
+        function showCustomAlert(message) {
+            const modal = document.getElementById('custom-alert-modal');
+            const messageElement = document.getElementById('alert-message');
+            
+            messageElement.textContent = message;
+            modal.classList.remove('hidden');
+        }
+
+        // Hiệu ứng hạt rơi (Giữ nguyên)
         function createParticle() {
             const particle = document.createElement('div');
             particle.classList.add('particle');
             const container = document.getElementById('particles-js');
             
-            // Thiết lập vị trí ngẫu nhiên
             particle.style.left = Math.random() * 100 + 'vw';
-            particle.style.animationDuration = Math.random() * 4 + 3 + 's'; // Rơi chậm hơn (3s - 7s)
-            particle.style.opacity = Math.random() * 0.5 + 0.5; // Độ mờ
+            particle.style.animationDuration = Math.random() * 4 + 3 + 's'; 
+            particle.style.opacity = Math.random() * 0.5 + 0.5; 
             
-            // Kích thước hạt 1px - 4px
             const size = Math.random() * 3 + 1; 
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
 
             container.appendChild(particle);
 
-            // Xóa particle sau khi rơi xong (sau 7s)
             setTimeout(() => {
                 particle.remove();
             }, 7000); 
         }
 
-        // Tạo hiệu ứng hạt rơi liên tục
         setInterval(createParticle, 100);
-
-        // Hướng dẫn thay đổi ảnh nền
-        window.onload = () => {
-             console.log("Trang web đã tải xong. Hãy thay ảnh nền Placeholder bằng ảnh thật của trường THPT Lương Đắc Bằng!");
-        }
     </script>
 </body>
 </html>
